@@ -12,7 +12,7 @@ function getComputerChoice() {
     return choice;
 }
 
-function game(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
     let result = "Draw"
@@ -23,6 +23,18 @@ function game(playerSelection, computerSelection) {
         } else if(computerSelection === "scissors"){
             result = "You Win! rock beats scissors";
         }
+    } else if(playerSelection === "paper") {
+        if(computerSelection === "scissors") {
+            result = "You Lose! scissors beats paper";
+        } else if(computerSelection === "rock") {
+            result = "You Win! paper beats rock"
+        }
+    } else if(playerSelection === "scissors") {
+        if(computerSelection === "rock") {
+            result = "You Lose! rock beats scissors";
+        } else if(computerSelection === "paper") {
+            result = "You Win! scossors beats paper";
+        }
     }
     return result;
 }
@@ -30,4 +42,4 @@ function game(playerSelection, computerSelection) {
 const playerSelection = "rock";
 const computerSelection = getComputerChoice();
 
-console.log(game(playerSelection, computerSelection));
+console.log(playRound(playerSelection, computerSelection));
