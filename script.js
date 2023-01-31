@@ -40,11 +40,16 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    for(let i = 0; i < 5; i++) {
-        const playerSelection = prompt("What is your choice?");
-        const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
-    }
-}
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+        
+        button.addEventListener('click', () => {
+            const computerSelection = getComputerChoice();
+            console.log(playRound(button.id, computerSelection));
+        });
+    });
+};
+
+
 
 game();
