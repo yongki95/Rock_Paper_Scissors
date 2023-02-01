@@ -1,3 +1,6 @@
+let result;
+
+
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
     let choice;
@@ -40,16 +43,63 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
+    let lose_count = 0;
+    let win_count = 0;
+    let draw_count = 0;
+    let total_count = 0;
+
     const buttons = document.querySelectorAll('button');
     buttons.forEach((button) => {
         
         button.addEventListener('click', () => {
             const computerSelection = getComputerChoice();
-            console.log(playRound(button.id, computerSelection));
+            result = playRound(button.id, computerSelection);
+
+            if(result.includes("Win") === true) {
+                win_count = win_count + 1;
+            } else if (result.includes("Lose") === true) {
+                lose_count = lose_count + 1;
+            } else {
+                draw_count++;
+            }
+
+
+            const container = document.querySelector(".container");
+            const div = document.createElement('div');
+            const text = document.createTextNode(`Here is your result: ${result}`);
+            
+            div.appendChild(text);
+            
+            container.appendChild(div); 
+
+            total_count = lose_count + win_count + draw_count;
+
+
+            if (total_count === 5) {
+                if(win_count > lose_count) {
+                    setTimeout(function() {alert("You Win The Game");}, 0.5);
+                } else if(win_count < lose_count) {
+                    setTimeout(function() {alert("You Lose The Game");}, 0.5);
+                } else {
+                    setTimeout(function() {alert("Draw");}, 0.5);
+                }
+
+                window.location.reload();
+            }
         });
+
     });
+
+
+    
 };
 
-
-
 game();
+
+
+
+
+
+
+
+
